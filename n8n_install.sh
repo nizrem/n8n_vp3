@@ -29,15 +29,16 @@ echo "✅ n8n data volume is ready!"
 
 # Download Dockerfile
 echo "📥 Downloading Dockerfile..."
-wget https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/Dockerfile -O Dockerfile
+curl -fsSL https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/Dockerfile -o ~/Dockerfile
 
 # Docker Compose Setup
 echo "🐳 Setting up Docker Compose..."
-wget https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/compose.yaml -O compose.yaml
+curl -fsSL https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/compose.yaml -o ~/compose.yaml
 export EXTERNAL_IP=http://"$(hostname -I | cut -f1 -d' ')"
 
 # Build and start containers
 echo "🔨 Building custom n8n image with ffmpeg..."
+cd ~
 sudo -E docker compose build
 sudo -E docker compose up -d
 
