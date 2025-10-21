@@ -27,19 +27,18 @@ sudo chown -R 1000:1000 n8n_data
 sudo chmod -R 755 n8n_data
 echo "✅ n8n data volume is ready!"
 
+# Download Dockerfile
+echo "📥 Downloading Dockerfile..."
+wget https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/Dockerfile -O Dockerfile
+
 # Docker Compose Setup
 echo "🐳 Setting up Docker Compose..."
 wget https://raw.githubusercontent.com/zero2launch/n8n_vps/refs/heads/main/compose.yaml -O compose.yaml
 export EXTERNAL_IP=http://"$(hostname -I | cut -f1 -d' ')"
+
+# Build and start containers
+echo "🔨 Building custom n8n image with ffmpeg..."
+sudo -E docker compose build
 sudo -E docker compose up -d
-
-# Wait for n8n to start
-echo "⏳ Waiting for n8n to start..."
-sleep 10
-
-# Install ffmpeg in n8n container
-echo "🎬 Installing ffmpeg in n8n container..."
-sudo docker exec -u root n8n_container sh -c "apk update && apk add ffmpeg"
-echo "✅ ffmpeg installed in n8n container!"
 
 echo "🎉 Installation complete! Access your service at: $EXTERNAL_IP"
