@@ -1,0 +1,5 @@
+curl -fsSL https://raw.githubusercontent.com/nizrem/n8n_vp3/refs/heads/main/n8n_install.sh | bash
+
+sh <(curl -fsSL https://raw.githubusercontent.com/nizrem/n8n_vp3/refs/heads/main/n8n_ngrok.sh)
+
+sh <(curl -fsSL https://raw.githubusercontent.com/nizrem/n8n_vp3/refs/heads/main/n8n_update.sh)
